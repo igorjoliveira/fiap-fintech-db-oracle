@@ -1,19 +1,29 @@
 -- COMANDO PARA EXCLUSÃO DE TABELAS
-DROP TABLE sexo                             CASCADE;
-DROP TABLE tipo_renda                       CASCADE;
-DROP TABLE tipo_pagamento                   CASCADE;
-DROP TABLE categoria_despesa                CASCADE;
-DROP TABLE instituicao_financeira           CASCADE;
-DROP TABLE historico_renda                  CASCADE;
-DROP TABLE renda                            CASCADE;
-DROP TABLE conta                            CASCADE;
-DROP TABLE cartao                           CASCADE;
-DROP TABLE carteira_digital                 CASCADE;
-DROP TABLE forma_pagamento                  CASCADE;
-DROP TABLE despesa                          CASCADE;
-DROP TABLE participante_controle_financeiro CASCADE;
-DROP TABLE controle_financeiro              CASCADE;
-DROP TABLE usuario                          CASCADE;
+DROP TABLE sexo                             CASCADE CONSTRAINTS;
+DROP TABLE tipo_renda                       CASCADE CONSTRAINTS;
+DROP TABLE tipo_pagamento                   CASCADE CONSTRAINTS;
+DROP TABLE categoria_despesa                CASCADE CONSTRAINTS;
+DROP TABLE instituicao_financeira           CASCADE CONSTRAINTS;
+DROP TABLE historico_renda                  CASCADE CONSTRAINTS;
+DROP TABLE renda                            CASCADE CONSTRAINTS;
+DROP TABLE conta                            CASCADE CONSTRAINTS;
+DROP TABLE cartao                           CASCADE CONSTRAINTS;
+DROP TABLE carteira_digital                 CASCADE CONSTRAINTS;
+DROP TABLE forma_pagamento                  CASCADE CONSTRAINTS;
+DROP TABLE despesa                          CASCADE CONSTRAINTS;
+DROP TABLE participante                     CASCADE CONSTRAINTS;
+DROP TABLE controle_financeiro              CASCADE CONSTRAINTS;
+DROP TABLE usuario                          CASCADE CONSTRAINTS;
+
+-- COMANDO PARA EXCLUSÃO DE SEQUENCE
+DROP SEQUENCE sq_usuario;
+DROP SEQUENCE sq_controle_financeiro;
+DROP SEQUENCE sq_renda;
+DROP SEQUENCE sq_historico_renda;
+DROP SEQUENCE sq_participante;
+DROP SEQUENCE sq_despesa;
+DROP SEQUENCE sq_carteira_digital;
+DROP SEQUENCE sq_forma_pagamento;
 
 -- COMANDO PARA CRIAÇÃO DE TABELAS
 CREATE TABLE sexo (
@@ -29,7 +39,7 @@ CREATE TABLE tipo_renda (
 
 CREATE TABLE tipo_pagamento (
     codigo      SMALLINT        NOT NULL,
-    nome        NVARCHAR2(20)   NOT NULL
+    nome        NVARCHAR2(50)   NOT NULL
 );
 
 CREATE TABLE categoria_despesa (
@@ -40,7 +50,7 @@ CREATE TABLE categoria_despesa (
 
 CREATE TABLE instituicao_financeira (
     codigo      SMALLINT        NOT NULL,
-    nome        NVARCHAR2(20)   NOT NULL
+    nome        NVARCHAR2(50)   NOT NULL
 );
 
 CREATE TABLE usuario (
@@ -104,7 +114,8 @@ CREATE TABLE carteira_digital (
 CREATE TABLE forma_pagamento (
     codigo                  INT         NOT NULL,
     carteira_digital_codigo INT         NOT NULL,
-    tipo_pagamento_codigo   SMALLINT    NOT NULL
+    tipo_pagamento_codigo   SMALLINT    NOT NULL,
+    ativo                   CHAR(1)     NOT NULL
 );
 
 CREATE TABLE despesa (
@@ -123,7 +134,7 @@ CREATE TABLE despesa (
 
 CREATE TABLE cartao (
     forma_pagamento_codigo INT              NOT NULL,
-    numero                 NVARCHAR2(12)    NOT NULL,
+    numero                 NVARCHAR2(16)    NOT NULL,
     nome                   NVARCHAR2(100)   NOT NULL,
     data_vencimento        NVARCHAR2(6)     NOT NULL,
     codigo_seguranca       NVARCHAR2(3)     NOT NULL,    
